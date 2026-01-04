@@ -63,4 +63,6 @@ public class User {
     public String getName() {return name;}
     public String getEmail() {return email;}
     public Role getRole() {return role;}
+    public String getPasswordHash() {return passwordHash;}
+    public String getSalt() {return salt;}
 }
