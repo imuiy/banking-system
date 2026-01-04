@@ -23,6 +23,16 @@ public class Transaction {
         this.description = description;
     }
 
+    public Transaction(String id ,String fromAccountId, String toAccountId, BigDecimal amount, TransactionType type, String description, LocalDateTime timestamp){
+        this.id = id;
+        this.fromAccountId = fromAccountId;
+        this.toAccountId = toAccountId;
+        this.amount = amount;
+        this.type = type;
+        this.timestamp = timestamp;
+        this.description = description;
+    }
+
     //getters
     public String getId() {return id;}
     public String getFromAccountId() {return fromAccountId;}
