@@ -14,12 +14,24 @@ public class User {
     private Role role;
     private LocalDateTime createdAt;
 
+    //new users
     public User(String name, String email, String password, Role role){
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.email = email;
         this.salt = generateSalt();
         this.passwordHash = hashPassword(password, salt);
+        this.role = role;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    //constructor loading from database
+    public User(String id, String name, String email, String passwordHash, String salt, Role role){
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.salt = salt;
         this.role = role;
         this.createdAt = LocalDateTime.now();
     }
