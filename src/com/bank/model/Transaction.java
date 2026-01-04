@@ -40,6 +40,7 @@ public class Transaction {
     public BigDecimal getAmount() {return amount;}
     public TransactionType getType() {return type;}
     public LocalDateTime getTimestamp() {return timestamp;}
+    public String getDescription() {return description;}
 
     @Override
     public String toString() {
