@@ -18,6 +18,20 @@ public class AuditLog {
         this.timestamp = LocalDateTime.now();
     }
 
+    public AuditLog(String id, String action, String userId, String details, LocalDateTime timestamp) {
+        this.id = id;
+        this.action = action;
+        this.userId = userId;
+        this.details = details;
+        this.timestamp = timestamp;
+    }
+
+    public String getId() {return id;}
+    public String getAction() {return action;}
+    public String getUserId() {return userId;}
+    public String getDetails() {return details;}
+    public LocalDateTime getTimestamp() {return timestamp;}
+
     @Override
     public String toString() {
         return String.format("[%s] %s by User %s: %s", 
