@@ -27,6 +27,17 @@ public class Account {
         this.lock = new ReentrantLock();
     }
 
+    public Account(String id, String userId, String accountNumber, AccountType type, BigDecimal balance, AccountStatus status){
+        this.id = id;
+        this.userId = userId;
+        this.accountNumber = accountNumber;
+        this.type = type;
+        this.balance = balance;
+        this.status = status;
+        this.createdAt = LocalDateTime.now();
+        this.lock = new ReentrantLock();
+    }
+
     private String generateAccountNumber(){
         return String.format("%012d", (long)(Math.random() * 1000000000000L));
     }
