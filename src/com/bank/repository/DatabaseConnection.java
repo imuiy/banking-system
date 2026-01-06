@@ -3,7 +3,7 @@ package com.bank.repository;
 import java.sql.*;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:h2:./banking_db";
+    private static final String URL = "jdbc:h2:mem:banking_db";
     private static final String USER = "sa";
     private static final String PASSWORD = "";
     
