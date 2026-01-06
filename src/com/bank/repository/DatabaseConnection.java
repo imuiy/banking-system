@@ -8,11 +8,15 @@ public class DatabaseConnection {
     private static final String PASSWORD = "";
     
     private static Connection connection;
+    private static boolean initialized = false;
     
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            initializeDatabase();
+            if(!initialized){
+                initializeDatabase();
+                initialized = true;
+            }
         }
         return connection;
     }
