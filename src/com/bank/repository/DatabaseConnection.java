@@ -3,20 +3,16 @@ package com.bank.repository;
 import java.sql.*;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:h2:mem:banking_db";
+    private static final String URL = "jdbc:h2:mem:banking_db;DB_CLOSE_DELAY=-1";
     private static final String USER = "sa";
     private static final String PASSWORD = "";
     
     private static Connection connection;
-    private static boolean initialized = false;
     
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            if(!initialized){
-                initializeDatabase();
-                initialized = true;
-            }
+            initializeDatabase();
         }
         return connection;
     }
