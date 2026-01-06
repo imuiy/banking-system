@@ -8,18 +8,18 @@ public class UserRepository {
     public void save(User user) throws SQLException {
         String sql = "INSERT INTO users (id, name, email, password_hash, salt, role) VALUES (?, ?, ?, ?, ?, ?)";
         
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        Connection conn = DatabaseConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
             
-            stmt.setString(1, user.getId());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getEmail());
-            stmt.setString(4, user.getPasswordHash());
-            stmt.setString(5, user.getSalt());
-            stmt.setString(6, user.getRole().name());
-            
-            stmt.executeUpdate();
-        }
+        stmt.setString(1, user.getId());
+        stmt.setString(2, user.getName());
+        stmt.setString(3, user.getEmail());
+        stmt.setString(4, user.getPasswordHash());
+        stmt.setString(5, user.getSalt());
+        stmt.setString(6, user.getRole().name());
+        
+        stmt.executeUpdate();
+        stmt.close();
     }
     
     public User findByEmail(String email) throws SQLException {
