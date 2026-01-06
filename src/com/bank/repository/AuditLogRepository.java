@@ -10,16 +10,16 @@ public class AuditLogRepository {
     public void save(AuditLog log) throws SQLException {
         String sql = "INSERT INTO audit_logs (id, action, user_id, details) VALUES (?, ?, ?, ?)";
         
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        Connection conn = DatabaseConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
             
-            stmt.setString(1, log.getId());
-            stmt.setString(2, log.getAction());
-            stmt.setString(3, log.getUserId());
-            stmt.setString(4, log.getDetails());
-            
-            stmt.executeUpdate();
-        }
+        stmt.setString(1, log.getId());
+        stmt.setString(2, log.getAction());
+        stmt.setString(3, log.getUserId());
+        stmt.setString(4, log.getDetails());
+        
+        stmt.executeUpdate();
+        stmt.close();
     }
     
     public List<AuditLog> findAll() throws SQLException {

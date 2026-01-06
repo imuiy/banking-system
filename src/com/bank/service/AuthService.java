@@ -22,6 +22,7 @@ public class AuthService {
             
             User user = new User(name, email, password, Role.USER);
             userRepo.save(user);
+            
             auditLogRepo.save(new AuditLog("USER_REGISTERED", user.getId(), 
                 "New user registered: " + email));
             
