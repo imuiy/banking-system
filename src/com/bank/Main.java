@@ -18,9 +18,9 @@ public class Main {
             // initialize services
             AuthService authService = new AuthService(userRepo, auditLogRepo);
             AccountService accountService = new AccountService(accountRepo, userRepo, auditLogRepo);
-            TransactionService transactionService = new TransactionService(
-                accountRepo, transactionRepo, auditLogRepo);
-            
+            TransactionService transactionService = new TransactionService(accountRepo, transactionRepo, auditLogRepo);
+
+            FraudDetectionService fraudService = new FraudDetectionService(transactionRepo, auditLogRepo);
             System.out.println("=== ONLINE BANKING SYSTEM (SQL) ===\n");
             
             // register users
@@ -35,19 +35,28 @@ public class Main {
             System.out.println("✓ Accounts created\n");
             
             // dep. money
+            fraudService.analyzeTransaction(acc1.getId(), new BigDecimal("5000.00"), user1.getId());
             transactionService.deposit(acc1.getId(), new BigDecimal("5000.00"), user1.getId());
+
+            fraudService.analyzeTransaction(acc3.getId(), new BigDecimal("3000.00"), user2.getId());
             transactionService.deposit(acc3.getId(), new BigDecimal("3000.00"), user2.getId());
             System.out.println("✓ Initial deposits made\n");
             
             // with. money
+            fraudService.analyzeTransaction(acc1.getId(), new BigDecimal("500.00"), user1.getId());
             transactionService.withdraw(acc1.getId(), new BigDecimal("500.00"), user1.getId());
             System.out.println("✓ Withdrawal completed\n");
             
             // transfer between users (w database transaction)
-            transactionService.transfer(acc1.getId(), acc3.getId(), 
-                new BigDecimal("1000.00"), user1.getId());
+            fraudService.analyzeTransaction(acc1.getId(), new BigDecimal("1000.00"), user1.getId());
+            transactionService.transfer(acc1.getId(), acc3.getId(), new BigDecimal("1000.00"), user1.getId());
             System.out.println("✓ Transfer completed (ACID transaction)\n");
             
+            // test fraud detec. with unusual transacs
+            System.out.println("=== TESTING FRAUD DETECTION ===");
+            fraudService.analyzeTransaction(acc1.getId(), new BigDecimal("50000.00"), user1.getId());
+            System.out.println();
+
             // show results
             System.out.println("=== ACCOUNT BALANCES ===");
             for (Account acc : accountService.getUserAccounts(user1.getId())) {

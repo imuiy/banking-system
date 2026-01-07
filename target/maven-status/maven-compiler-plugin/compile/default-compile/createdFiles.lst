@@ -13,6 +13,7 @@ com/bank/repository/TransactionRepository.class
 com/bank/model/Role.class
 com/bank/model/TransactionType.class
 com/bank/model/Transaction.class
+com/bank/service/FraudDetectionService.class
 com/bank/repository/AccountRepository.class
 com/bank/service/AuthService.class
 com/bank/repository/UserRepository.class

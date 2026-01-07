@@ -6,6 +6,7 @@
 /Users/cicizhu/banking-system/src/com/bank/model/AuditLog.java
 /Users/cicizhu/banking-system/src/com/bank/model/User.java
 /Users/cicizhu/banking-system/src/com/bank/service/AuthService.java
+/Users/cicizhu/banking-system/src/com/bank/service/FraudDetectionService.java
 /Users/cicizhu/banking-system/src/com/bank/repository/UserRepository.java
 /Users/cicizhu/banking-system/src/com/bank/repository/AuditLogRepository.java
 /Users/cicizhu/banking-system/src/com/bank/repository/AccountRepository.java
